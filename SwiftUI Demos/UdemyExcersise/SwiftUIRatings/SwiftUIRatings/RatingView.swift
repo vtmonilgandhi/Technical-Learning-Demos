@@ -35,6 +35,21 @@ struct RatingView: View {
     }
 }
 
+@available(iOS 14.0, *)
+struct LibraryContent: LibraryContentProvider {
+    
+    @LibraryContentBuilder
+    var views: [LibraryItem] {
+        LibraryItem(
+            RatingView(rating: .constant(3)), title: "Rating Control", category: .control)
+    }
+    
+    @LibraryContentBuilder
+    func modifiers(base: Image) -> [LibraryItem] {
+        LibraryItem(base.resizedToFill(width: 150, height: 150))
+    }
+}
+
 struct RatingView_Previews: PreviewProvider {
     static var previews: some View {
         RatingView(rating: .constant(3))
